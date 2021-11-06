@@ -1,6 +1,4 @@
-# GoApptiv Coding Standards
-
-## REST API Standards
+# GoApptiv REST API Standards
 
 - [Methods](#methods)
 - [Naming Conventions](#naming-conventions)

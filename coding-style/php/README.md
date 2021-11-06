@@ -1,11 +1,9 @@
-# GoApptiv Coding Style
+# GoApptiv PHP Coding Style
 
 - [PHP Coding Style](#ga-cs)
 - [Auto Fix Laravel Project](#auto-fix-laravel-project)
 - [Auto Format File on Save](#auto-format-file)
 - [Setup GitHub Action](#github-action)
-
-## PHP Coding Style
 
 <a name="ga-cs"></a>
 GoApptiv PHP Projects follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading standard.
