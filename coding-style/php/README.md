@@ -4,9 +4,10 @@
 - [Auto Fix Laravel Project](#auto-fix-laravel-project)
 - [Auto Format File on Save](#auto-format-file)
 - [Setup GitHub Action](#github-action)
+- [Troubleshooting](#troubleshooting)
 
 <a name="ga-cs"></a>
-GoApptiv PHP Projects follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding standard and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading standard.
+GoApptiv PHP Projects follows the [PSR-12](https://www.php-fig.org/psr/psr-12/) coding style and the [PSR-4](https://www.php-fig.org/psr/psr-4/) autoloading standard.
 
 <a name="auto-fix-laravel-project"></a>
 
@@ -19,6 +20,8 @@ This process will automatically fix all the files in the project to the GoApptiv
 ```bash
 composer require friendsofphp/php-cs-fixer --dev
 ```
+
+Note: If you're facing any issue in installing the package, kindly view the [troubleshooting](#troubleshooting) section at the bottom.
 
 ### Step 2:
 
@@ -122,4 +125,46 @@ jobs:
        uses: docker://oskarstark/php-cs-fixer-ga
        with:
          args: --config=.php-cs-fixer.php --diff --dry-run
+```
+
+<a name="#troubleshooting"></a>
+
+## Troubleshooting
+
+#### 1) friendsofphp/php-cs-fixer[v3.2.0, ..., v3.2.1] require symfony/polyfill-php72 ^1.23...
+
+Use the following command to install the package
+
+```cmd
+composer require friendsofphp/php-cs-fixer --dev -W
+```
+
+#### 2) Your requirements could not be resolved to an installable set of packages ... Conclusion: don't install friendsofphp/php-cs-fixer v3.2.1 (conflict analysis result)
+
+Create a sub-dir "dev-tools", and inside it run the following command
+
+```cmd
+composer init && composer require --dev friendsofphp/php-cs-fixer
+```
+
+In the dev-tools move the .php-cs-fixer.php file and modify the directory path
+
+```php
+...
+
+$finder = Finder::create()
+    ->in([
+        __DIR__ . '/..' . '/app',
+        __DIR__ . '/..' . '/config',
+        __DIR__ . '/..' . '/database',
+        __DIR__ . '/..' . '/resources',
+        __DIR__ . '/..' . '/routes',
+        __DIR__ . '/..' . '/tests',
+    ])
+    ->name('*.php')
+    ->notName('*.blade.php')
+    ->ignoreDotFiles(true)
+    ->ignoreVCS(true);
+
+...
 ```
